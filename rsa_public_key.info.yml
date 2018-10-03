@@ -1,0 +1,4 @@
+name: RSA public key field
+type: module
+description: Defines a field type for storing RSA public keys.
+core: 8.x

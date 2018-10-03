@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for RSA public key field module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function rsa_public_key_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.rsapublickey':
+      return '<p>' . t('The RSA public key module defines a field type for the Field module useful to store RSA public keys which can be used to authenticate of the Web using the WebID protocol. Each public key is composed of a certificate containing hexadecimal characters and a module exponent. See the <a href=":field-help">Field module help page</a> for more information about fields.', [
+        ':field-help' => Url::fromRoute('admin/help/field'),
+      ]) . '</p>';
+  }
+}
+
+/**
+ * Implements hook_rdf_namespaces().
+ */
+function rsa_public_key_rdf_namespaces() {
+  return [
+    'cert' => 'http://www.w3.org/ns/auth/cert#',
+  ];
+}
