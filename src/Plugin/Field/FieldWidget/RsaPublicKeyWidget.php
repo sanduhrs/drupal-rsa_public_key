@@ -21,14 +21,25 @@ class RsaPublicKeyWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element['modulus'] = $element + [
+    $element['modulus'] = [
+      '#title' => t('Modulus'),
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->__get('modulus') ? $items[$delta]->__get('modulus') : NULL,
     ];
-    $element['exponent'] = $element + [
+    $element['exponent'] = [
+      '#title' => t('Exponent'),
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->__get('exponent') ? $items[$delta]->__get('exponent') : NULL,
     ];
+
+    // If cardinality is 1, ensure a label is output for the field by wrapping
+    // it in a details element.
+    if ($this->fieldDefinition->getFieldStorageDefinition()->getCardinality() == 1) {
+      $element += [
+        '#type' => 'fieldset',
+      ];
+    }
+
     return $element;
   }
 

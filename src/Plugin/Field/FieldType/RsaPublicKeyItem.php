@@ -45,8 +45,7 @@ class RsaPublicKeyItem extends FieldItemBase {
   public function isEmpty() {
     $modulus = $this->get('modulus')->getValue();
     $exponent = $this->get('exponent')->getValue();
-    return ($modulus === NULL && $exponent === NULL)
-      || ($modulus === '' && $exponent === '');
+    return empty($modulus) && empty($exponent);
   }
 
   /**
